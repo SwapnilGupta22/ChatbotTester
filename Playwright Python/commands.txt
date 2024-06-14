@@ -1,0 +1,5 @@
+#broswer specific commands:
+
+    pytest test_two_message.py --browser firefox
+    pytest test_img.py --browser firefox
+
