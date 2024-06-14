@@ -10,14 +10,14 @@ async def run(playwright) -> None:
     await page.goto("https://chatgpt.com/")
     await page.get_by_test_id("login-button").click()
     await page.get_by_label("Email address*").click()
-    await page.get_by_label("Email address*").fill("swapnilgupta2298@gmail.com")
+    await page.get_by_label("Email address*").fill("EMAIL")
     await page.get_by_role("button", name="Continue", exact=True).click()
     await page.get_by_label("Password*").click()
-    await page.get_by_label("Password*").fill("Swapnil@1234")
+    await page.get_by_label("Password*").fill("PASSWORD")
     await page.get_by_role("button", name="Continue", exact=True).click()
     
     current_working_dir = os.getcwd()
-    file_path = os.path.join(current_working_dir, "IMG_20201013_143640.jpg")
+    file_path = os.path.join(current_working_dir, "test_image.jpg")
     print(file_path)
 
     # Simulate necessary clicks to reveal the "Upload from Computer" button
