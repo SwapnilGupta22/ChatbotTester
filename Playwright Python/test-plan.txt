@@ -1,0 +1,51 @@
+Objective
+The objective of this test plan is to ensure the basic functionalities of ChatGPT, specifically focusing on the login process and text-based exchanges, are working as expected. The test plan will outline the scenarios to be tested, the approach for testing, and the expected outcomes.
+
+Scope
+The scope of this test plan includes:
+
+Verifying the login functionality.
+Verifying the ability to send and receive text-based messages.
+Test Scenarios
+
+Scenario 1: Successful login with valid credentials.
+Scenario 2: Sending a valid text message and receiving a response.
+
+Test Environment
+Framework: Playwright
+Language: Python
+Browser: Firefox
+Platform: Web
+
+Assumptions
+Valid credentials for testing are available. (Sign-up might be required)
+The testing environment has internet access.
+ChatGPT interface is accessible via a URL.
+
+Prerequisites
+Python and Playwright are installed and configured in the system.
+Credentials are securely stored in a safer way as compared to adding direct value to the code.
+
+Test Cases
+Test Case 1: Successful Login with Valid Credentials
+
+Test Steps:
+Navigate to the ChatGPT landing page.
+Interact with the Login button.
+Enter a valid email ID, hit continue
+Enter a compatible password, and hit continue.
+Verify if the page is redirected to the ChatGPT default text window.
+
+Expected Result:
+The user successfully navigates to the ChatGPT landing page.
+The user enters a valid Email ID and Password to view the ChatGPT text window when clicking on continue.
+
+Test Case 2: Sending a Valid Text Message
+
+Test Steps:
+Enter a valid text message in the chat input box.
+Click on the submit button.
+Verify whether a response is generated.
+
+Expected Result:
+The user enters a message and receives a response from ChatGPT.
