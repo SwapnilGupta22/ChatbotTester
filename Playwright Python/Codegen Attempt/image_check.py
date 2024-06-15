@@ -17,7 +17,7 @@ async def run(playwright) -> None:
     await page.get_by_role("button", name="Continue", exact=True).click()
     
     current_working_dir = os.getcwd()
-    file_path = os.path.join(current_working_dir, "test_image.jpg")
+    file_path = os.path.join(current_working_dir, "Assets/test_image.jpg")
     print(file_path)
 
     # Simulate necessary clicks to reveal the "Upload from Computer" button
