@@ -1,7 +1,7 @@
 import pytest
 import os
 from playwright.sync_api import sync_playwright
-from config import ChatGPTTester
+from library.config import ChatGPTTester
 
 @pytest.fixture(scope="module")
 def playwright_setup():
@@ -21,11 +21,8 @@ def test_login(playwright_setup):
 
 def test_upload_image(playwright_setup):
     tester = playwright_setup
-    # response_visible = tester.send_message("Describe") #upload image
-    # assert response_visible, "Unable to upload image"
-
     current_working_dir = os.getcwd()
-    file_path = os.path.join(current_working_dir, "test_image.jpg")
+    file_path = os.path.join(current_working_dir, "Assets/test_image.jpg")
     tester.upload_file(file_path)
     tester.page.wait_for_timeout(4000)
 

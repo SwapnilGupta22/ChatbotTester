@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright
-from config import ChatGPTTester
+from library.config import ChatGPTTester
 
 @pytest.fixture(scope="module")
 def playwright_setup():
