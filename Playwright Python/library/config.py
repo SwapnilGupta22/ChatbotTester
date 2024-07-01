@@ -46,7 +46,7 @@ class ChatGPTTester:
         return response_visible
     
     def upload_file(self, file_path):
-        self.page.locator(self.MEDIA_UPLOAD_BUTTON_XPATH).click()
+        self.page.locator(library.locators.MEDIA_UPLOAD_BUTTON_XPATH).click()
         self.page.wait_for_timeout(4000)
         self.page.get_by_role("menuitem", name="Upload from computer").click()
         input_element_form = self.page.query_selector('input[type="file"]')
