@@ -1,7 +1,9 @@
 import pytest
 from playwright.sync_api import sync_playwright
+import library.config
 from library.config import ChatGPTTester
 
+chatgpt_url = library.config.GPT_url
 @pytest.fixture(scope="module")
 def playwright_setup():
     with sync_playwright() as p:
@@ -16,7 +18,7 @@ def playwright_setup():
 def test_login(playwright_setup):
     tester = playwright_setup
     tester.login()
-    assert tester.page.url == "https://chatgpt.com/"
+    assert tester.page.url == chatgpt_url
 
 def test_send_first_message(playwright_setup):
     tester = playwright_setup
@@ -31,4 +33,4 @@ def test_send_second_message(playwright_setup):
 def test_logout(playwright_setup):
     tester = playwright_setup
     tester.logout()
-    assert tester.page.url == "https://chatgpt.com/"
+    assert tester.page.url == chatgpt_url

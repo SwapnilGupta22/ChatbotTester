@@ -5,8 +5,10 @@ from playwright.sync_api import Playwright, sync_playwright, expect
 
 load_dotenv()
 
-USERNAME = os.getenv("CHATGPT_USERNAME")
-PASSWORD = os.getenv("CHATGPT_PASSWORD")
+GPT_USERNAME = os.getenv("CHATGPT_USERNAME")
+GPT_PASSWORD = os.getenv("CHATGPT_PASSWORD")
+GPT_url = "https://chatgpt.com/"
+
 
 class ChatGPTTester:
     ASSISTANT_RESPONSE_XPATH = '//div[@data-message-author-role="assistant"]'
@@ -16,20 +18,19 @@ class ChatGPTTester:
         self.page = page
 
     def login(self):
-        self.page.goto("https://chatgpt.com/")
+        self.page.goto(GPT_url)
         self.page.get_by_test_id("login-button").click()
-        self.page.get_by_label("Email address*").fill(os.getenv("CHATGPT_USERNAME"))
+        self.page.get_by_label("Email address*").fill(GPT_USERNAME)
         self.page.get_by_role("button", name="Continue", exact=True).click()
-        self.page.get_by_label("Password*").fill(PASSWORD)
+        self.page.get_by_label("Password*").fill(GPT_PASSWORD)
         self.page.click('button[type="submit"]')
         self.page.get_by_role("button", name="Continue", exact=True).click()
-        self.page.wait_for_url("https://chatgpt.com/")
+        self.page.wait_for_url(GPT_url)
 
     def logout(self):
-        #self.page.click('button[aria-label="logout"]')
         self.page.get_by_test_id("fruit-juice-profile").click()
         self.page.get_by_role("menuitem", name="Log out").click()
-        self.page.wait_for_url("https://chatgpt.com/")
+        self.page.wait_for_url(GPT_url)
 
     def send_message(self, message):
         self.page.get_by_placeholder("Message ChatGPT").click()
