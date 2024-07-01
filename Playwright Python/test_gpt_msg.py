@@ -1,38 +1,36 @@
 import pytest
 from playwright.sync_api import sync_playwright
 import library.config
-from library.config import MistralTester
+from library.config import ChatGPTTester
 
-chat_url = library.config.mistral_chat_url
-auth_url = library.config.mistral_auth_url
-
+chatgpt_url = library.config.GPT_url
 @pytest.fixture(scope="module")
-def mistral_setup():
+def playwright_setup():
     with sync_playwright() as p:
         browser = p.firefox.launch(headless=False)
         context = browser.new_context()
         page = context.new_page()
-        tester = MistralTester(page)
+        tester = ChatGPTTester(page)
         yield tester
         context.close()
         browser.close()
 
-def test_login(mistral_setup):
-    tester = mistral_setup
+def test_login(playwright_setup):
+    tester = playwright_setup
     tester.login()
-    assert tester.page.url == chat_url
+    assert tester.page.url == chatgpt_url
 
-def test_send_first_message(mistral_setup):
-    tester = mistral_setup
-    response_visible = tester.send_message("What is AI?")
+def test_send_first_message(playwright_setup):
+    tester = playwright_setup
+    response_visible = tester.send_message("Hello, ChatGPT!")
     assert response_visible, "First message response not visible"
 
-def test_send_second_message(mistral_setup):
-    tester = mistral_setup
+def test_send_second_message(playwright_setup):
+    tester = playwright_setup
     response_visible = tester.send_message("How are you today?")
     assert response_visible, "Second message response not visible"
 
-def test_logout(mistral_setup):
-    tester = mistral_setup
+def test_logout(playwright_setup):
+    tester = playwright_setup
     tester.logout()
-    #assert tester.page.url == auth_url
+    assert tester.page.url == chatgpt_url
