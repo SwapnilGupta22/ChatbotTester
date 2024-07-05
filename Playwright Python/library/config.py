@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-import time
+import time, re
 from playwright.sync_api import Playwright, sync_playwright, expect
 import library.locators
 
@@ -12,10 +12,15 @@ GPT_PASSWORD = os.getenv("CHATGPT_PASSWORD")
 MIS_USERNAME = os.getenv("MISTRAL_USERNAME")
 MIS_PASSWORD = os.getenv("MISTRAL_PASSWORD")
 
+GEM_USERNAME = os.getenv("GEMINI_USERNAME")
+GEM_PASSWORD = os.getenv("GEMINI_PASSWORD")
+
 mistral_homepage_url = "https://mistral.ai/"
 mistral_chat_url = "https://chat.mistral.ai/chat"
 mistral_auth_url = "https://auth.mistral.ai/ui/login/"
 GPT_url = "https://chatgpt.com/"
+gemini_url = "https://gemini.google.com/"
+gemini_chat_url = "https://gemini.google.com/app"
 
 class ChatGPTTester:
     def __init__(self, page):
@@ -98,3 +103,56 @@ class MistralTester:
     #     input_element_form.set_input_files(file_path)
     #     time.sleep(6)
     #     input_element_form.close()
+
+class GeminiTester:
+    def __init__(self, page):
+        self.page = page
+
+    def login(self):
+        self.page.goto(gemini_url)
+        self.page.locator(library.locators.gemini_login_cta_xpath).click()
+        expect(self.page.get_by_label("Email or phone"),"Email ID field not present").to_be_visible()
+        self.page.get_by_label("Email or phone").fill(GEM_USERNAME)
+        self.page.get_by_text("Next").click()
+        self.page.get_by_label("Enter your password").fill(GEM_PASSWORD)
+        self.page.get_by_role('button', name='Next').click()
+        self.page.wait_for_url(gemini_url)
+
+    def send_message(self, message):
+        self.page.locator(library.locators.gemini_message_xpath).fill(message)
+        self.page.get_by_label("Send message").click()
+        self.page.locator(library.locators.gemini_response_xpath).scroll_into_view_if_needed()
+        self.page.wait_for_selector(library.locators.gemini_response_xpath)
+        return self.page.locator(f"{library.locators.gemini_response_xpath} >> nth=0").is_visible()
+    
+    def send_message_2(self, message):
+        expect(self.page.locator(library.locators.gemini_message_xpath)).to_be_visible()
+        self.page.locator(library.locators.gemini_message_xpath).fill(message)
+        expect(self.page.get_by_label("Send message")).to_be_visible()
+        self.page.get_by_label("Send message").click()
+        self.page.wait_for_selector(f"{library.locators.gemini_response_xpath} >> nth=1")
+        return self.page.locator(f"{library.locators.gemini_response_xpath} >> nth=1").is_visible()
+
+    def logout(self):
+        expect(self.page.locator(library.locators.gemini_profile_cta_xpath),"My profile button is not present on the page").to_be_visible()
+        self.page.locator(library.locators.gemini_profile_cta_xpath).click()
+        expect(self.page.locator(library.locators.gemini_logout_cta_xpath),"Sign out button is not present on the page").to_be_visible()
+        self.page.locator(library.locators.gemini_logout_cta_xpath).click()
+        expect(self.page.get_by_label("Choose an account"),"Sign In window is not present on the page").to_be_visible()
+    
+    # def login_and_save_state(self):
+        
+    #     self.page.goto(gemini_url)
+    #     self.page.wait_for_selector(".g-recaptcha", state="hidden")
+    #     self.page.locator(library.locators.gemini_login_cta_xpath).click()
+        
+    #     expect(self.page.get_by_label("Email or phone"),"Email ID field not present").to_be_visible()
+    #     #self.page.locator(library.locators.username_field_xpath).fill(MIS_USERNAME)
+    #     self.page.get_by_label("Email or phone").fill(GEM_USERNAME)
+    #     self.page.get_by_text("Next").click()
+    #     # expect(self.page.get_by_test_id("node/input/password"), "Password field not present").to_be_visible()
+    #     self.page.get_by_label("Enter your password").fill(GEM_PASSWORD)
+    #     self.page.get_by_text("Next").click()
+    #     self.page.wait_for_url("https://gemini.google.com/app")
+    #     # Save storage state to a file
+    #     self.page.context.storage_state(path='storage_state.json')

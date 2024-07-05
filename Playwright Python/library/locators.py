@@ -13,3 +13,12 @@ dialog_reject_cta_xpath = '//button[@data-role="necessary"]'
 chat_submit_cta_xpath = '(//button[@type="submit"])'
 img_response_xpath = '(//img[@class="hidden dark:block"])[2]'
 logo_count_xpath = '//img[@alt="LeChat Logo"]'
+
+#Gemini AI locators
+gemini_login_cta_xpath = '//button[@data-test-id="action-button"]'
+gemini_message_xpath = '//div[@role="textbox"]'
+gemini_response_xpath = '//*[contains(@class, "response-container-footer")]'
+gemini_profile_cta_xpath = '(//a[@role="button"])[2]'
+gemini_logout_cta_xpath = '//span[@class="JWEMkf"]/span[2]'
+#'(//span[@jsaction="click:vyP2Ce"])[3]'
+#(//a[@rel="noopener noreferrer"]/span[2]/div)[2]
