@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-import time, re
+import time
 from playwright.sync_api import Playwright, sync_playwright, expect
 import library.locators
 
