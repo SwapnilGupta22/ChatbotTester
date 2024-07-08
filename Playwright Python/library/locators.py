@@ -21,6 +21,4 @@ gemini_response_xpath = '//*[contains(@class, "response-container-footer")]'
 gemini_profile_cta_xpath = '(//a[@role="button"])[2]'
 gemini_profile_window_xpath = '(//iframe[@role="presentation"])[2]'
 gemini_logout_cta_xpath = '//a[@href="https://accounts.google.com/Logout"]'
-#//span[@class="SedFmc"]/span[2]
-#'(//span[@jsaction="click:vyP2Ce"])[3]'
-#(//a[@rel="noopener noreferrer"]/span[2]/div)[2]
+gemini_logout_verify_xpath = '//*[@id="signout"]'
