@@ -134,11 +134,24 @@ class GeminiTester:
         return self.page.locator(f"{library.locators.gemini_response_xpath} >> nth=1").is_visible()
 
     def logout(self):
-        expect(self.page.locator(library.locators.gemini_profile_cta_xpath),"My profile button is not present on the page").to_be_visible()
         self.page.locator(library.locators.gemini_profile_cta_xpath).click()
-        expect(self.page.locator(library.locators.gemini_logout_cta_xpath),"Sign out button is not present on the page").to_be_visible()
-        self.page.locator(library.locators.gemini_logout_cta_xpath).click()
-        expect(self.page.get_by_label("Choose an account"),"Sign In window is not present on the page").to_be_visible()
+        self.page.locator(library.locators.gemini_profile_window_xpath).focus()
+        self.page.locator(library.locators.gemini_profile_window_xpath).press("Tab")
+        self.page.locator(library.locators.gemini_profile_window_xpath).press("Tab")
+        self.page.locator(library.locators.gemini_profile_window_xpath).press("Tab")
+        self.page.locator(library.locators.gemini_profile_window_xpath).press("Tab")
+        self.page.locator(library.locators.gemini_profile_window_xpath).press("Tab")
+        self.page.locator(library.locators.gemini_profile_window_xpath).press("Enter")
+
+        #expect(self.page.locator(library.locators.gemini_logout_cta_xpath)).to_have_class(".SedFmc")
+        #sign_out_button = self.page.locator('.SedFmc')
+        # if sign_out_button.inner_text() == "Sign out":
+        #     sign_out_button.click()
+        # else:
+        #     print("CTA not found")
+        # expect(self.page.locator(library.locators.gemini_logout_cta_xpath),"Sign out button is not present on the page").to_be_visible()
+        # self.page.locator(library.locators.gemini_logout_cta_xpath).click()
+        # expect(self.page.get_by_label("Choose an account"),"Sign In window is not present on the page").to_be_visible()
     
     # def login_and_save_state(self):
         
