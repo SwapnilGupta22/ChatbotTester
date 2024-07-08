@@ -36,4 +36,4 @@ def test_send_second_message(gemini_setup):
 def test_logout(gemini_setup):
     tester = gemini_setup
     tester.logout()
-    #assert tester.page.url == auth_url
+    assert tester.page.url == gemini_url
