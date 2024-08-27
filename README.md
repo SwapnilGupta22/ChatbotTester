@@ -1,6 +1,6 @@
-# ChatGPT Functionality Testing with Python and Playwright
+# AI Chatbot Functionality Testing with Python and Playwright
 
-This repository contains code and instructions for testing basic functionalities of ChatGPT using Python and Playwright. The tests include logging in, exchanging text messages, uploading an image, and receiving responses.
+This repository contains code and instructions for testing the functionalities of AI Chatbot tools like ChatGPT, Gemini AI, and Mistral AI using Python and Playwright. The tests include logging in, exchanging text messages, uploading an image(implemented only for ChatGPT), and waiting and receiving responses, and performing logout.
 
 ## Table of Contents
 1. [Problem Statement](#problem-statement)
